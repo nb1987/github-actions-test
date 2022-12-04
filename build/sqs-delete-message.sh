@@ -34,7 +34,7 @@ else
             receipt_handle=$(echo $message | base64 --decode | jq -r '.ReceiptHandle')
             message_id=$(echo $message | base64 --decode | jq -r '.MessageId')
             if [ "$message_id" = "$ID" ]; then
-                aws sqs delete-message --queue-url $URL --receipt-handle $receipt_handle --profile aws-admin
+                aws sqs delete-message --queue-url $URL --receipt-handle $receipt_handle
                 echo "Deleted message with MessageId $message_id and with ReceiptHandle $receipt_handle"
                 messages_deleted=$(( $messages_deleted + 1 ))
             fi
