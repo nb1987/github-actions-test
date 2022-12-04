@@ -33,6 +33,7 @@ else
         for message in $(echo "${sqs_response}" | jq -r '.Messages[] | @base64'); do
             receipt_handle=$(echo $message | base64 --decode | jq -r '.ReceiptHandle')
             message_id=$(echo $message | base64 --decode | jq -r '.MessageId')
+            echo "Found message with MessageId $message_id ..."
             if [ "$message_id" = "$ID" ]; then
                 aws sqs delete-message --queue-url $URL --receipt-handle $receipt_handle
                 echo "Deleted message with MessageId $message_id and with ReceiptHandle $receipt_handle"
