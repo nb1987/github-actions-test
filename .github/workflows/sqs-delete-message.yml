@@ -1,4 +1,4 @@
-name: SQS Delete Message
+name: SQS Delete Message From Queue
 on:
   workflow_dispatch:
     inputs:
